@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+  <title>Cat Facts</title>
+</head>
+<body>
+  <div class="container text-center">
+    <div class="row vh-100 justify-content-center align-items-center">
+      <div class="col-12 col-lg-6">
+        <p id="cat-fact" class="placeholder-glow fs-3 fs-lg-1" role="button"></h4>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script>
+    const catFact = document.getElementById('cat-fact')
+
+    window.addEventListener('load', () => getCatFact())
+    catFact.addEventListener('click', () => getCatFact())
+
+    async function getCatFact() {
+      catFact.innerHTML = '<span class="placeholder col-12 placeholder-lg"></span>';
+
+      setTimeout(() => {
+        fetch('https://meowfacts.herokuapp.com')
+          .then((response) => response.json())
+          .then((data) => catFact.innerText = data.data[0])
+      }, 1000)
+    }
+  </script>
+</body>
+</html>
